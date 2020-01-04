@@ -9,24 +9,26 @@ const testData = {
     currentConditions: 'Drizzle',
     conditionDescription: 'light intensity drizzle',
     currentWind: 10,
-    icon: `https://openweathermap.org/img/wn/09d@2x.png`
+    icon: `https://openweathermap.org/img/wn/09d@2x.png`,
+    rainFall: 0.25
   },
   zipCode: '29492'
 };
 
-const initialState = {
-  weather: {
-    name: null,
-    currentTemp: null,
-    dailyHigh: null,
-    dailyLow: null,
-    currentConditions: null,
-    conditionDescription: null,
-    currentWind: null,
-    icon: null
-  },
-  zipCode: '29492'
-};
+// const initialState = {
+//   weather: {
+//     name: null,
+//     currentTemp: null,
+//     dailyHigh: null,
+//     dailyLow: null,
+//     currentConditions: null,
+//     conditionDescription: null,
+//     currentWind: null,
+//     icon: null,
+//     rainFall: null
+//   },
+//   zipCode: '29492'
+// };
 
 function rootReducer(state = testData, action) {
   const { weather } = state;
