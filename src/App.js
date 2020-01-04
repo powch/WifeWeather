@@ -1,25 +1,20 @@
-import React, { Component } from 'react';
-import InfoCluster from './components/InfoCluster';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { setWeatherData } from './actions';
 
-class App extends Component {
-  state = {
-    name: null,
-    currentTemp: null,
-    dailyHigh: null,
-    dailyLow: null,
-    currentConditions: null,
-    conditionDescription: null,
-    currentWind: null,
-    icon: null
-  };
+import Weather from './pages/Weather';
 
-  componentDidMount() {
+const App = props => {
+  console.log(props);
+  const { zipCode, setWeatherData } = props;
+
+  useEffect(() => {
     fetch(
-      `http://api.openweathermap.org/data/2.5/weather?zip=29492,us&units=imperial&appid=29b1398b1d0f546acae0bb159935c1f4`
+      `http://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&units=imperial&appid=${process.env.REACT_APP_WEATHER_ID}`
     )
       .then(res => res.json())
       .then(data =>
-        this.setState({
+        setWeatherData({
           name: data.name,
           currentTemp: Math.floor(data.main.temp),
           dailyHigh: data.main.temp_max,
@@ -29,19 +24,28 @@ class App extends Component {
           currentWind: data.wind.speed,
           icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
         })
-      )
-      .catch(err => console.log(err));
-  }
+      );
+  });
 
-  render() {
-    return (
-      <InfoCluster
-        icon={this.state.icon}
-        currentTemp={this.state.currentTemp}
-        description={this.state.conditionDescription}
-      />
-    );
-  }
-}
+  return <Weather {...props} />;
+};
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    weather: state.weather,
+    zipCode: state.zipCode
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setWeatherData: payload => dispatch(setWeatherData(payload))
+  };
+};
+
+const ConnectedApp = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+
+export default ConnectedApp;
