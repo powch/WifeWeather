@@ -10,7 +10,7 @@ const App = props => {
     // getData(props);
   });
 
-  return <Weather {...props} />;
+  return <Weather weather={props.weather} />;
 };
 
 const mapStateToProps = state => {

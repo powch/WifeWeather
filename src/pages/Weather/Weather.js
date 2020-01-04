@@ -1,15 +1,7 @@
 import React from 'react';
 
-import InfoCluster from './components/InfoCluster';
+import Header from './components/Header';
 
-const Weather = ({ weather }) => {
-  return (
-    <InfoCluster
-      icon={weather.icon}
-      currentTemp={weather.currentTemp}
-      conditions={weather.currentConditions}
-    />
-  );
-};
+const Weather = ({ weather }) => <Header weather={weather} />;
 
 export default Weather;

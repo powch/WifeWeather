@@ -16,12 +16,12 @@ const IconContainer = styled.div({
   justifyContent: 'center'
 });
 
-const InfoCluster = ({ icon, currentTemp, conditions }) => (
+const InfoCluster = ({ icon, currentTemp, currentConditions }) => (
   <ClusterContainer>
     <WeatherIcon icon={icon} />
     <IconContainer>
       <CurrentTemp>{currentTemp}°F</CurrentTemp>
-      <CondDescription>{conditions.toLowerCase()}</CondDescription>
+      <CondDescription>{currentConditions.toLowerCase()}</CondDescription>
     </IconContainer>
   </ClusterContainer>
 );
